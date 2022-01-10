@@ -1,0 +1,56 @@
+/* mobile and tablet */
+@media (max-width: 1023px) {
+    .scrooll-headerFirst {
+        background-color: #fff;
+    }
+    .user-login.user__open {
+        z-index: 10;
+    }
+
+    .owl-nav {
+        width: 100vw;
+    }
+}
+
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+    .app__container-detail {
+        margin-top: 32% !important;
+    }
+    .support-mgTop {
+        margin-top: 22px;
+    }
+    .owl-nav,
+    .scrooll-headerFirst {
+        width: 100%;
+    }
+
+}
+
+/* mobile */
+@media (max-width: 739px) {
+    .app__container-detail {
+        margin-top: 175px !important;
+    }
+    .img-header--big {
+        display: none;
+    }
+    .header__search.header__search-mobile-open {
+        z-index: 10;
+    }
+    .buy-IP {
+        width: 100vw
+    }
+}
+
+/* ipad pro */
+
+@media (min-width: 1024px) {
+   .img-buy-margin {
+       margin-right: -32px;
+   }
+   .support-margin {
+       margin-left: 18px;
+       margin-top: 8px;
+   }
+}

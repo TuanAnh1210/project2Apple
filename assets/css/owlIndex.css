@@ -1,0 +1,57 @@
+
+/* slider--owl */
+
+.slider__scrooll {
+    position: relative;
+    margin: 26px 0;
+}
+
+.owl-nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 50px;
+}
+
+.owl-nav button {
+    background-color: rgba(255, 255, 255, 0.7) !important;
+    width: 46px;
+    height: 50px;
+    border-radius: 100%;
+    color: #000000 !important;
+
+}
+.owl-next:hover,
+.owl-prev:hover {
+    color: #fa0851 !important;
+    background-color: #fff !important;
+}
+.owl-nav button span {
+    transform: translateY(-19%);
+    display: block;
+}
+.owl-dots {
+    position: absolute;
+    top: 94%;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.owl-dot.active {
+    background-color: #fff !important;
+}
+.owl-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 100%;
+    background-color: rgba(204, 204, 204, .4) !important;
+    margin: 0 4px;
+    border: 2px solid #ccc !important;
+}
+.owl-dot:hover {
+    background-color: rgb(255, 255, 255) !important;
+}
