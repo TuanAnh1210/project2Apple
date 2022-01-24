@@ -1,20 +1,20 @@
 var headerS = document.querySelector('.header__search-history');
 
-headerS.onmousedown = function(e) {
+headerS.onmousedown = function (e) {
     e.preventDefault();
 };
 
 var sp = document.querySelector('.home-product-item__like');
 
 
-sp.onclick = function() {
+sp.onclick = function () {
     if (sp != document.querySelector('.home-product-item__like.home-product-item__like--liked')) {
         this.classList.add('home-product-item__like--liked')
     }
     else {
         this.classList.remove('home-product-item__like--liked')
     }
-    
+
 };
 
 const modalBasic = document.querySelector('.js-registration');
@@ -38,7 +38,7 @@ const loginMobile = document.querySelectorAll('.user-login-item');
 
 
 for (a = 0; a < loginMobile.length; a++) {
-    loginMobile[0].onclick = function() {
+    loginMobile[0].onclick = function () {
         authForm1.classList.add('open');
         modalBig.classList.add('modal-open');
         if (authForm2 == document.querySelector('.auth-form2.open')) {
@@ -46,7 +46,7 @@ for (a = 0; a < loginMobile.length; a++) {
         }
     }
 
-    loginMobile[1].onclick = function() {
+    loginMobile[1].onclick = function () {
         authForm2.classList.add('open')
         modalBig.classList.add('modal-open');
 
@@ -60,15 +60,15 @@ for (a = 0; a < loginMobile.length; a++) {
 
 
 
-userHeading.onclick = function() {
+userHeading.onclick = function () {
     if (userOpen != document.querySelector('.user-login.user__open')) {
-        
+
         userOpen.classList.add('user__open')
     }
-   
+
 }
 
-document.querySelector('.user-login-list').onclick = function() {
+document.querySelector('.user-login-list').onclick = function () {
     userOpen.classList.remove('user__open')
 }
 
@@ -76,14 +76,14 @@ document.querySelector('.user-login-list').onclick = function() {
 
 
 function showResgistration() {
-        authForm1.classList.add('open');
-        modalBig.classList.add('modal-open')
+    authForm1.classList.add('open');
+    modalBig.classList.add('modal-open')
 
 };
 
 function hideResgitration() {
-        authForm1.classList.remove('open');
-        modalBig.classList.remove('modal-open')
+    authForm1.classList.remove('open');
+    modalBig.classList.remove('modal-open')
 }
 
 function showLogin() {
@@ -111,7 +111,7 @@ function closeAll() {
     authForm2.classList.remove('open');
     modalBig.classList.remove('modal-open')
 
-} 
+}
 
 function addMobile() {
     mobileSearch.classList.add('header__search-mobile-open')
@@ -119,7 +119,7 @@ function addMobile() {
 
 
 for (const btn of btnAll) {
-    btn.addEventListener('click', closeAll )
+    btn.addEventListener('click', closeAll)
 }
 
 modalBasic.addEventListener('click', showResgistration);
@@ -129,7 +129,7 @@ modalLogin.addEventListener('click', showLogin);
 convert.addEventListener('click', hoanDoi);
 convert2.addEventListener('click', hoanDoi2);
 mobileSearch1.addEventListener('click', addMobile);
-app1.onclick = function() {
+app1.onclick = function () {
     mobileSearch.classList.remove('header__search-mobile-open');
     userOpen.classList.remove('user__open')
 }
@@ -142,7 +142,7 @@ const showOffPass = document.querySelector('.showOff-pass');
 const showOffPass2 = document.querySelector('.showOff-pass2');
 const passLogin = document.getElementById('passLogin');
 
-showOffPass2.onclick = function() {
+showOffPass2.onclick = function () {
     if (x) {
         this.classList.add('open')
         passLogin.type = 'text';
@@ -155,20 +155,20 @@ showOffPass2.onclick = function() {
     }
 }
 
-showOffPass.onclick = function() {
-    const inputPass =  document.querySelectorAll('.auth-form__input');
+showOffPass.onclick = function () {
+    const inputPass = document.querySelectorAll('.auth-form__input');
 
     for (z = 0; z < inputPass.length; z++) {
 
         console.log(inputPass)
-        
-        if(x) {
+
+        if (x) {
             showOffPass.classList.add('open');
             inputPass[1].type = 'text';
             inputPass[2].type = 'text';
             x = false
         }
-        else{
+        else {
             showOffPass.classList.remove('open');
             inputPass[1].type = 'password';
             inputPass[2].type = 'password';
@@ -176,3 +176,15 @@ showOffPass.onclick = function() {
         }
     }
 }
+
+
+const handleBtns = document.querySelectorAll(".home-filter__btn.btn");
+
+handleBtns.forEach((handleBtn, index) => {
+    handleBtn.onclick = function () {
+        document.querySelector('.home-filter__btn.btn.btn--primary').classList.remove('btn--primary')
+        this.classList.add('btn--primary')
+    }
+})
+
+
