@@ -13,17 +13,11 @@ const validateEmail = () => {
     if (email.value == account.email) {
         return true
     }
-    else {
-        return false
-    }
 }
 
 const validatePassword = () => {
     if (password.value == account.password) {
         return true
-    }
-    else {
-        return false
     }
 }
 
