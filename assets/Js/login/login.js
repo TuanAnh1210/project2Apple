@@ -1,56 +1,160 @@
-const btn_login = document.querySelector('.login_form')
-const password = document.querySelector('.js-login__password')
-const email = document.querySelector('.js-input__login')
+const btn__regis = document.querySelector(".btn__regis");
+const userRes = document.getElementById("userRes");
+const passRes = document.getElementById("passRes");
+const rePassRes = document.getElementById("rePassRes");
+const loginIpts = document.querySelectorAll(".login-ipt");
 
+let dataAccountUsers = [];
 
+btn__regis.onclick = function (e) {
+  e.preventDefault();
+  let detailRegis = {};
+  let isError = true;
 
-let account = {
-    email: 'tuananh0852131210@gmail.com',
-    password: 'Tuananh12'
-}
+  if (userRes.value.trim().length < 8) {
+    userRes.parentElement.querySelector(".error").innerText =
+      "Tên đăng nhập tối thiểu 8 kí tự";
+    userRes.style.border = "1px solid red";
+    isError = false;
+  }
+  if (passRes.value.trim().length < 6) {
+    passRes.parentElement.querySelector(".error").innerText =
+      "Mật khấu tối thiểu 6 kí tự";
+    passRes.style.border = "1px solid red";
+    rePassRes.style.border = "1px solid red";
+    isError = false;
+  }
 
-const validateEmail = () => {
-    if (email.value == account.email) {
-        return true
+  if (passRes.value.trim() != rePassRes.value.trim()) {
+    passRes.parentElement.querySelector(".error").innerText =
+      "Mật khẩu không khớp";
+    passRes.style.border = "1px solid red";
+    rePassRes.parentElement.querySelector(".error").innerText =
+      "Mật khẩu không khớp";
+    rePassRes.style.border = "1px solid red";
+    isError = false;
+  }
+
+  for (const loginIpt of loginIpts) {
+    if (loginIpt.value.trim() == "") {
+      loginIpt.parentElement.querySelector(".error").innerText =
+        "Dữ liệu không được để trống";
+      loginIpt.style.border = "1px solid red";
+      isError = false;
     }
-}
 
-const validatePassword = () => {
-    if (password.value == account.password) {
-        return true
+    loginIpt.oninput = () => {
+      loginIpt.parentElement.querySelector(".error").innerText = "";
+      loginIpt.style.border = "";
+    };
+  }
+
+  if (isError) {
+    detailRegis.userName = userRes.value;
+    detailRegis.passWord = passRes.value;
+
+    if (
+      dataAccountUsers.some(
+        (account) => account.userName == detailRegis.userName
+      )
+    ) {
+      userRes.parentElement.querySelector(".error").innerText =
+        "Tên đăng nhập đã có người sử dụng";
+      userRes.style.border = "1px solid red";
+      isError = false;
+    } else {
+      dataAccountUsers.push(detailRegis);
+      userRes.value = "";
+      passRes.value = "";
+      rePassRes.value = "";
+      document.querySelector(".regis__success").style.display = "block";
     }
-}
+  }
+};
 
+document.querySelector(".resOke").onclick = function () {
+  this.parentElement.style.display = "none";
+};
 
+// login
+const loginReal = document.querySelector(".login-real");
+const loginField = ["ipt__login-user", "ipt__login-pass"];
+const ipt__loginUser = document.querySelector("#ipt__login-user");
+const ipt__loginPass = document.querySelector("#passLogin");
 
-email.onkeyup = (e) => {
-    if (e.keyCode === 13) {
-        alert('Vui lòng nhập đầy đủ')
-    }
-}
+loginReal.onclick = function (e) {
+  e.preventDefault();
+  let isError = true;
+  let accountLogin = {};
 
-password.onkeyup = (e) => {
-    if (e.keyCode === 13) {
-        let isEmail = validateEmail()
-        let isPassword = validatePassword()
-        if (isEmail && isPassword) {
-            window.location.href = 'https://www.facebook.com/bean.tuan.777'
+  if (ipt__loginUser.value.trim() == "") {
+    ipt__loginUser.parentElement.querySelector(".error").innerText =
+      "Dữ liệu không được để trống";
+    ipt__loginUser.style.border = "1px solid red";
+    isError = false;
+  }
+  if (ipt__loginPass.value.trim() == "") {
+    ipt__loginPass.parentElement.querySelector(".error").innerText =
+      "Dữ liệu không được để trống";
+    ipt__loginPass.style.border = "1px solid red";
+    isError = false;
+  }
+
+  ipt__loginUser.oninput = () => {
+    ipt__loginUser.parentElement.querySelector(".error").innerText = "";
+    ipt__loginUser.style.border = "";
+  };
+  ipt__loginPass.oninput = () => {
+    ipt__loginPass.parentElement.querySelector(".error").innerText = "";
+    ipt__loginPass.style.border = "";
+  };
+
+  if (isError) {
+    accountLogin.userName = ipt__loginUser.value;
+    accountLogin.passWord = ipt__loginPass.value;
+
+    if (checkAccountLogin(accountLogin)) {
+      const user = document.querySelector(".user");
+      if (dataAccountUsers) {
+        let usersLi = document.querySelectorAll(".isUser");
+        for (const Li of usersLi) {
+          Li.style.display = "none";
         }
-        else {
-            alert('Tài khoản không chính xác')
-        }
+
+        user.innerHTML = `
+         <div class="header__navbar--lange">
+        <a class="header__navbar-item-link" href="#"
+          ><i class="header__navbar-icon fas fa-user"></i>
+          ${accountLogin.userName}
+
+          <div class="header__navbar-sub">
+            <ul class="header__navbar-col">
+              <li class="header__navbar-language">
+                Tài khoản của tôi
+              </li>
+              <li class="header__navbar-language">Đăng xuất</li>
+            </ul>
+          </div>
+        </a>
+      </div> 
+        `;
+
+        document.querySelector(".modal").classList.remove("modal-open");
+      }
+    } else {
+      alert("dang nhap that bai");
     }
+  }
+};
+
+// Check accountLogin
+
+function checkAccountLogin(accountCheck) {
+  let test = dataAccountUsers.some(
+    (accountUser) =>
+      accountUser.userName == accountCheck.userName &&
+      accountUser.passWord == accountCheck.passWord
+  );
+
+  return test;
 }
-
-
-btn_login.onclick = () => {
-    let isEmail = validateEmail()
-    let isPassword = validatePassword()
-    if (isEmail && isPassword) {
-        window.location.href = 'https://www.facebook.com/bean.tuan.777'
-    }
-    else {
-        alert('Tài khoản không chính xác')
-    }
-}
-
